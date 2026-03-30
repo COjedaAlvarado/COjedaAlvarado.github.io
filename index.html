@@ -85,7 +85,14 @@
     /* SKILLS */
     .skills { display:grid; grid-template-columns:1fr; gap:15px; max-width:600px; margin:auto; }
     .barra { background:rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; }
-    .progreso { background:#38bdf8; padding:8px; text-align:right; border-radius:20px; font-size:12px; }
+    .progreso {
+      background:#38bdf8;
+      padding:8px;
+      text-align:right;
+      border-radius:20px;
+      font-size:12px;
+      transition: width 1.5s ease;
+    }
     .skill { background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; text-align:center; }
 
     /* CONTACT */
@@ -139,18 +146,26 @@
   <div class="grid">
 
     <div class="card">
-      <img src="img/plabal.png" alt="Sistema Plabal">
+      <img src="img/p7.jpg" alt="Sistema Plabal">
       <div class="card-body">
-        <h4>Sistema Plabal</h4>
-        <p>Sistema de gestión desarrollado para empresa, incluyendo administración, registros, reportes y control de procesos internos.</p>
+        <h4>Sistema Termopaneles Plabal</h4>
+        <p>Sistema de gestión para empresa de termopaneles, incluyendo administración, registros y control de procesos.</p>
       </div>
     </div>
 
     <div class="card">
-      <img src="img/rincon.png" alt="Rincón Saludable">
+      <img src="img/rs1.jpg" alt="Rincón Saludable">
       <div class="card-body">
         <h4>Rincón Saludable</h4>
-        <p>Sitio web y sistema de administración para emprendimiento de vida saludable, gestión de productos y contenido.</p>
+        <p>Sitio web y sistema de administración para emprendimiento de vida saludable.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="img/p1.jpg" alt="RPM Repuestos">
+      <div class="card-body">
+        <h4>RPM Repuestos</h4>
+        <p>Sistema web para gestión y visualización de repuestos automotrices.</p>
       </div>
     </div>
 
@@ -158,7 +173,7 @@
       <img src="img/gestion8.png" alt="Sistema Bomberos">
       <div class="card-body">
         <h4>Sistema Gestión Bomberos</h4>
-        <p>Sistema completo desarrollado en Laravel con gestión de voluntarios, hoja de vida, cursos, sanciones, cuotas, guardias y estadísticas.</p>
+        <p>Sistema completo desarrollado en Laravel con gestión de voluntarios, cursos, sanciones y administración interna.</p>
       </div>
     </div>
 
@@ -166,7 +181,7 @@
       <img src="img/guardias.png" alt="Calendario Guardias">
       <div class="card-body">
         <h4>Calendario de Guardias</h4>
-        <p>Módulo de turnos y guardias con calendario dinámico y asignación de voluntarios por día.</p>
+        <p>Módulo de turnos con calendario dinámico para la compañía de bomberos.</p>
       </div>
     </div>
 
