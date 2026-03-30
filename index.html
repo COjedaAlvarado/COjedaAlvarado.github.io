@@ -163,7 +163,7 @@
 
     .hero h2 {
       font-family: var(--sans);
-      font-size: clamp(42px, 7vw, 80px);
+      font-size: clamp(32px, 5.5vw, 72px);
       font-weight: 700;
       line-height: 1.05;
       letter-spacing: -2px;
@@ -637,7 +637,7 @@
   <div class="hero-content">
     <div class="hero-tag">&#x2726; Disponible para proyectos</div>
     <h2>
-      <span class="name">César Ojeda Alvarado</span>
+      <span class="name" style="white-space:nowrap;">César Ojeda Alvarado</span>
       <span class="role">Full Stack Developer</span>
     </h2>
     <p class="hero-desc">
@@ -806,10 +806,10 @@
   <h3>Trabajemos Juntos</h3>
 
   <div class="contact-grid">
-    <a href="mailto:cesar.ojeda.alvarado@gmail.com" class="contact-card">
+    <a href="/cdn-cgi/l/email-protection#3f5c5a4c5e4d1150555a5b5e115e53495e4d5e5b507f58525e5653115c5052" class="contact-card">
       <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
       <h4>EMAIL</h4>
-      <p>cesar.ojeda.alvarado@gmail.com</p>
+      <p><span class="__cf_email__" data-cfemail="9bf8fee8fae9b5f4f1fefffab5faf7edfae9fafff4dbfcf6faf2f7b5f8f4f6">[email&#160;protected]</span></p>
     </a>
     <a href="https://github.com/COjedaAlvarado" target="_blank" class="contact-card">
       <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
@@ -828,7 +828,7 @@
   <p>© 2026 <span>César Ojeda</span> — Construido con <span>&lt;/&gt;</span> y café</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Scroll reveal
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -841,13 +841,4 @@
   const skillObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.progreso').forEach(bar => {
-          setTimeout(() => { bar.style.width = bar.dataset.w; }, 200);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('#skills').forEach(el => skillObserver.observe(el));
-</script>
-</body>
-</html>
+        entry.target.querySelectorA
