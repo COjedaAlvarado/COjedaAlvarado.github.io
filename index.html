@@ -81,6 +81,34 @@
     .card:hover { transform:translateY(-10px); }
     .card img { width:100%; }
     .card .card-body { padding:20px; }
+    .tech {
+      margin-top:10px;
+      font-size:12px;
+      color:#94a3b8;
+    }
+    .badges span {
+      display:inline-block;
+      background:rgba(56,189,248,0.2);
+      color:#38bdf8;
+      padding:4px 8px;
+      border-radius:8px;
+      margin:2px;
+      font-size:11px;
+    }
+    .card-buttons {
+      margin-top:15px;
+      display:flex;
+      gap:10px;
+    }
+    .btn-small {
+      padding:8px 12px;
+      font-size:12px;
+      border-radius:8px;
+      background:#38bdf8;
+      color:#0f172a;
+      text-decoration:none;
+      font-weight:bold;
+    }
 
     /* SKILLS */
     .skills { display:grid; grid-template-columns:1fr; gap:15px; max-width:600px; margin:auto; }
@@ -149,23 +177,41 @@
       <img src="img/p7.jpg" alt="Sistema Plabal">
       <div class="card-body">
         <h4>Sistema Termopaneles Plabal</h4>
-        <p>Sistema de gestión para empresa de termopaneles, incluyendo administración, registros y control de procesos.</p>
+        <p>Sistema de gestión para empresa de termopaneles, incluyendo administración y control de procesos.</p>
+        <div class="badges">
+          <span>PHP</span><span>MySQL</span><span>Bootstrap</span>
+        </div>
+        <div class="card-buttons">
+          <a href="#" class="btn-small">Ver</a>
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <img src="img/rs1.PNG" alt="Rincón Saludable">
+      <img src="img/rs1.jpg" alt="Rincón Saludable">
       <div class="card-body">
         <h4>Rincón Saludable</h4>
         <p>Sitio web y sistema de administración para emprendimiento de vida saludable.</p>
+        <div class="badges">
+          <span>HTML</span><span>CSS</span><span>JS</span>
+        </div>
+        <div class="card-buttons">
+          <a href="#" class="btn-small">Ver</a>
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <img src="img/p2.jpg" alt="RPM Repuestos">
+      <img src="img/p1.jpg" alt="RPM Repuestos">
       <div class="card-body">
         <h4>RPM Repuestos</h4>
         <p>Sistema web para gestión y visualización de repuestos automotrices.</p>
+        <div class="badges">
+          <span>Laravel</span><span>MySQL</span>
+        </div>
+        <div class="card-buttons">
+          <a href="#" class="btn-small">Ver</a>
+        </div>
       </div>
     </div>
 
@@ -173,7 +219,13 @@
       <img src="img/gestion8.png" alt="Sistema Bomberos">
       <div class="card-body">
         <h4>Sistema Gestión Bomberos</h4>
-        <p>Sistema completo desarrollado en Laravel con gestión de voluntarios, cursos, sanciones y administración interna.</p>
+        <p>Sistema completo en Laravel con gestión de voluntarios, cursos, sanciones, cuotas y administración.</p>
+        <div class="badges">
+          <span>Laravel</span><span>MySQL</span><span>AdminLTE</span><span>Chart.js</span>
+        </div>
+        <div class="card-buttons">
+          <a href="#" class="btn-small">Ver</a>
+        </div>
       </div>
     </div>
 
@@ -182,6 +234,12 @@
       <div class="card-body">
         <h4>Calendario de Guardias</h4>
         <p>Módulo de turnos con calendario dinámico para la compañía de bomberos.</p>
+        <div class="badges">
+          <span>Laravel</span><span>JavaScript</span>
+        </div>
+        <div class="card-buttons">
+          <a href="#" class="btn-small">Ver</a>
+        </div>
       </div>
     </div>
 
@@ -246,6 +304,16 @@
   }, { threshold: 0.2 });
 
   document.querySelectorAll('.animar').forEach(el => observer.observe(el));
+
+  // animación de skills
+  const skills = document.querySelectorAll('.progreso');
+  skills.forEach(skill => {
+    const width = skill.style.width;
+    skill.style.width = '0';
+    setTimeout(() => {
+      skill.style.width = width;
+    }, 300);
+  });
 </script>
 
 </body>
