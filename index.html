@@ -83,7 +83,9 @@
     .card .card-body { padding:20px; }
 
     /* SKILLS */
-    .skills { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; }
+    .skills { display:grid; grid-template-columns:1fr; gap:15px; max-width:600px; margin:auto; }
+    .barra { background:rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; }
+    .progreso { background:#38bdf8; padding:8px; text-align:right; border-radius:20px; font-size:12px; }
     .skill { background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; text-align:center; }
 
     /* CONTACT */
@@ -137,10 +139,26 @@
   <div class="grid">
 
     <div class="card">
+      <img src="img/plabal.png" alt="Sistema Plabal">
+      <div class="card-body">
+        <h4>Sistema Plabal</h4>
+        <p>Sistema de gestión desarrollado para empresa, incluyendo administración, registros, reportes y control de procesos internos.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="img/rincon.png" alt="Rincón Saludable">
+      <div class="card-body">
+        <h4>Rincón Saludable</h4>
+        <p>Sitio web y sistema de administración para emprendimiento de vida saludable, gestión de productos y contenido.</p>
+      </div>
+    </div>
+
+    <div class="card">
       <img src="img/gestion8.png" alt="Sistema Bomberos">
       <div class="card-body">
         <h4>Sistema Gestión Bomberos</h4>
-        <p>Sistema completo desarrollado en Laravel con gestión de voluntarios, cursos, sanciones, cuotas y estadísticas.</p>
+        <p>Sistema completo desarrollado en Laravel con gestión de voluntarios, hoja de vida, cursos, sanciones, cuotas, guardias y estadísticas.</p>
       </div>
     </div>
 
@@ -148,7 +166,7 @@
       <img src="img/guardias.png" alt="Calendario Guardias">
       <div class="card-body">
         <h4>Calendario de Guardias</h4>
-        <p>Sistema de turnos y guardias con calendario dinámico para la compañía de bomberos.</p>
+        <p>Módulo de turnos y guardias con calendario dinámico y asignación de voluntarios por día.</p>
       </div>
     </div>
 
@@ -158,12 +176,37 @@
 <section id="skills" class="animar">
   <h3>Skills</h3>
   <div class="skills">
-    <div class="skill">Laravel</div>
-    <div class="skill">PHP</div>
-    <div class="skill">JavaScript</div>
-    <div class="skill">MySQL</div>
-    <div class="skill">Bootstrap</div>
-    <div class="skill">Git</div>
+
+    <div>
+      <p>Laravel</p>
+      <div class="barra"><div class="progreso" style="width:90%">90%</div></div>
+    </div>
+
+    <div>
+      <p>PHP</p>
+      <div class="barra"><div class="progreso" style="width:85%">85%</div></div>
+    </div>
+
+    <div>
+      <p>JavaScript</p>
+      <div class="barra"><div class="progreso" style="width:70%">70%</div></div>
+    </div>
+
+    <div>
+      <p>MySQL</p>
+      <div class="barra"><div class="progreso" style="width:80%">80%</div></div>
+    </div>
+
+    <div>
+      <p>Bootstrap</p>
+      <div class="barra"><div class="progreso" style="width:85%">85%</div></div>
+    </div>
+
+    <div>
+      <p>Git</p>
+      <div class="barra"><div class="progreso" style="width:75%">75%</div></div>
+    </div>
+
   </div>
 </section>
 
