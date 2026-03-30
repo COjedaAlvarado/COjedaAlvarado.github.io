@@ -1,385 +1,194 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - César Ojeda</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    html { scroll-behavior:smooth; }
+    body { background:#0f172a; color:#e2e8f0; }
+
+    /* NAV */
+    header {
+      position:fixed;
+      width:100%;
+      top:0;
+      background:rgba(15,23,42,0.8);
+      backdrop-filter: blur(10px);
+      z-index:1000;
+    }
+    nav {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      max-width:1100px;
+      margin:auto;
+      padding:15px;
+    }
+    nav h1 { color:#38bdf8; }
+    nav ul { display:flex; list-style:none; }
+    nav ul li a {
+      color:#e2e8f0;
+      text-decoration:none;
+      margin-left:20px;
+      transition:0.3s;
+    }
+    nav ul li a:hover { color:#38bdf8; }
+
+    /* HERO */
+    .hero {
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:linear-gradient(rgba(15,23,42,.8), rgba(15,23,42,1)), url('img/bomberos.png');
+      background-size:cover;
+      background-position:center;
+    }
+    .hero h2 { font-size:50px; }
+    .hero p { margin-top:10px; font-size:20px; color:#94a3b8; }
+    .btn {
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 25px;
+      background:#38bdf8;
+      color:#0f172a;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    .btn:hover { transform:scale(1.05); }
+
+    /* SECCIONES */
+    section { padding:80px 20px; max-width:1100px; margin:auto; }
+    h3 { font-size:32px; margin-bottom:20px; text-align:center; }
+
+    /* CARDS */
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
+    .card {
+      background:rgba(255,255,255,0.05);
+      border-radius:20px;
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+      transition:0.3s;
+    }
+    .card:hover { transform:translateY(-10px); }
+    .card img { width:100%; }
+    .card .card-body { padding:20px; }
+
+    /* SKILLS */
+    .skills { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; }
+    .skill { background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; text-align:center; }
+
+    /* CONTACT */
+    .contact a { color:#38bdf8; text-decoration:none; }
+
+    footer {
+      text-align:center;
+      padding:30px;
+      color:#94a3b8;
+    }
+
+    /* ANIMACIONES */
+    .animar { opacity:0; transform:translateY(40px); transition:1s; }
+    .animar.visible { opacity:1; transform:translateY(0); }
+  </style>
 </head>
 <body>
-    <!-- MENU ENCABEZADO -->
-    <div class="contenedor-header">
-        <header>
-            <div class="logo">
-                <a href="#">Menú</a>
-            </div>
-            <nav id="nav">
-                <ul>
-                    <li><a href="#inicio" onclick="seleccionar()">HOME</a></li>
-                    <li><a href="#sobremi" onclick="seleccionar()">ABOUT</a></li>
-                    <li><a href="#skills" onclick="seleccionar()">SKILLS</a></li>
-                    <li><a href="#curriculum" onclick="seleccionar()">CURRICULUM</a></li>
-                    <li><a href="#portfolio" onclick="seleccionar()">PORTFOLIO</a></li>
-                    <li><a href="#contacto" onclick="seleccionar()">CONTACT</a></li>
-                </ul>
-            </nav>
-            <div class="nav-responsive" onclick="mostrarOcultarMenu()">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        </header>
+
+<header>
+  <nav>
+    <h1>César Ojeda</h1>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#sobre">Sobre mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h2>Desarrollador Full Stack</h2>
+    <p>Especialista en Sistemas de Gestión y Desarrollo Web con Laravel</p>
+    <a href="#proyectos" class="btn">Ver Proyectos</a>
+  </div>
+</section>
+
+<section id="sobre" class="animar">
+  <h3>Sobre mí</h3>
+  <p>
+    Soy Ingeniero en Informática con más de 20 años de experiencia desarrollando sistemas para empresas.
+    Actualmente enfocado en desarrollo web con Laravel, sistemas de gestión, automatización de procesos
+    y desarrollo de soluciones reales.
+  </p>
+</section>
+
+<section id="proyectos" class="animar">
+  <h3>Proyectos</h3>
+  <div class="grid">
+
+    <div class="card">
+      <img src="img/gestion8.png" alt="Sistema Bomberos">
+      <div class="card-body">
+        <h4>Sistema Gestión Bomberos</h4>
+        <p>Sistema completo desarrollado en Laravel con gestión de voluntarios, cursos, sanciones, cuotas y estadísticas.</p>
+      </div>
     </div>
 
-    <!-- SECCION INICIO -->
-    <section id="inicio" class="inicio">
-        <div class="contenido-banner">
-            <div class="contenedor-img">
-                <img src="img/hero.png" alt="">
-            </div>
-            <h1>CÉSAR OJEDA ALVARADO</h1>
-            <h2>Ingeniero en Informática.</h2>
-            <div class="redes">
-                <a href="https://www.facebook.com/mapumawen/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://twitter.com/mapumawen" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://www.instagram.com/cesar_ojeda/" target="_blank"><i class="fa-brands fa-instagram"></i>
-                <a href="https://www.linkedin.com/in/luis-cesar-ojeda-alvarado-32504a43/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BvCZdOpVtR9Gh%2BYVuI7P35g%3D%3D" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                
-            </div>
-        </div>
-    </section>
+    <div class="card">
+      <img src="img/guardias.png" alt="Calendario Guardias">
+      <div class="card-body">
+        <h4>Calendario de Guardias</h4>
+        <p>Sistema de turnos y guardias con calendario dinámico para la compañía de bomberos.</p>
+      </div>
+    </div>
 
-    <!-- SECCION SOBRE MI -->
-    <section id="sobremi" class="sobremi">
-        <div class="contenido-seccion">
-            <h2>Sobre mí</h2>
-            <p><span>Hola, soy César Ojeda Alvarado.</span> Llevo mas de 20 años programando aplicaciones windows para empresas del rubro de la acuicultura. 
-                Actualmente me encuentro titulado de la carrera de Ingenieria Infomática con mención en Ciberseguridad.</p>
+  </div>
+</section>
 
-            <div class="fila">
-                <!-- datos personales -->
-                <div class="col">
-                    <h3>Datos Personales</h3>
-                    <ul>
-                        <li>
-                            <strong>Email</strong>
-                            cesar.ojeda.alvarado@gmail.com
-                        </li>
-                        <li>
-                            <strong>Website</strong>
-                           <a href="https://github.com/COjedaAlvarado?tab=repositories" target="_blank">GitHub</a>
-                        </li>
-                        <li>
-                            <strong>Cargo</strong>
-                            <span>Desarrollo de Software</span>
-                        </li>
-                    </ul>
-                </div>
+<section id="skills" class="animar">
+  <h3>Skills</h3>
+  <div class="skills">
+    <div class="skill">Laravel</div>
+    <div class="skill">PHP</div>
+    <div class="skill">JavaScript</div>
+    <div class="skill">MySQL</div>
+    <div class="skill">Bootstrap</div>
+    <div class="skill">Git</div>
+  </div>
+</section>
 
-                <!-- intereses -->
-                <div class="col">
-                    <h3>Intereses</h3>
-                    <div class="contenedor-intereses">
-                        <div class="interes">
-                            <i class="fa-solid fa-gamepad"></i>
-                            <span>JUEGOS</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-headphones"></i>
-                            <span>MUSICA</span>
-                        </div>
-                        <div class="interes">
-                             <i class="fa-solid fa-person-hiking"></i>
-                            <span>CAMPING</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-brands fa-windows"></i>
-                            <span>WINDOWS</span>
-                        </div>
-                        <div class="interes">
-                           <i class="fa-solid fa-futbol"></i>
-                            <span>FUTBOL</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-book"></i>
-                            <span>LIBROS</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-film"></i>
-                            <span>PELICULAS</span>
-                        </div>
-                        <div class="interes">
-                            <i class="fa-solid fa-video"></i>
-                            <span>SERIES</span>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="contacto" class="contact animar">
+  <h3>Contacto</h3>
+  <p>Email: <a href="mailto:cesar.ojeda.alvarado@gmail.com">cesar.ojeda.alvarado@gmail.com</a></p>
+  <p>GitHub: <a href="https://github.com/COjedaAlvarado" target="_blank">github.com/COjedaAlvarado</a></p>
+  <p>LinkedIn: <a href="https://linkedin.com" target="_blank">Ver perfil</a></p>
+</section>
 
-    <!-- SECCION SKILLS -->
-    <section class="skills" id="skills">
-        <div class="contenido-seccion">
-            <h2>Skills</h2>
-            <div class="fila">
-                <!-- Technical Skill -->
-                <div class="col">
-                    <h3>Technical Skills</h3>
-                    <div class="skill">
-                        <span>Javascript</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>85%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>HTML & CSS</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>90%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Bootstrap</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>90%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Bases de Datos</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>80%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Laravel</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>90%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Professional Skills -->
-                <div class="col">
-                    <h3>Professional Skills</h3>
-                    <div class="skill">
-                        <span>Comunicación</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>80%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Trabajo en Equipo</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>75%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Responsabilidad</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>99%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Trabajo bajo Presión</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>75%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <span>Liderazgo</span>
-                        <div class="barra-skill">
-                            <div class="progreso">
-                                <span>95%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<footer>
+  <p>© 2026 César Ojeda - Portfolio</p>
+</footer>
 
-    <!-- SECCION CURRICULUM -->
-    <section id="curriculum" class="curriculum">
-        <div class="contenido-seccion">
-            <h2>Curriculum</h2>
-            <div class="fila">
-                <div class="col izquierda">
-                    <h3>Educación</h3>
-                    <div class="item izq">
-                        <h4>Ingeniería en informática mención ciberseguridad</h4>
-                        <span class="casa">Instituto Profesional Providencia</span>
-                        <span class="fecha">2019-2023</span>
-                        <p>Titulado de la carrera, Distinción Máxima 6.7.</p>
-                        <div class="conectori">
-                            <div class="circuloi"></div>
-                        </div>
-                    </div>
-                    <div class="item izq">
-                        <h4>Programador Analista</h4>
-                        <span class="casa">CFT CIDEC</span>
-                        <span class="fecha">1992-1996</span>
-                        <p>Egresado de Programación y Análisis de Sistemas.</p>
-                        <div class="conectori">
-                            <div class="circuloi"></div>
-                        </div>
-                    </div>
-                    <div class="item izq">
-                        <h4>Contabilidad</h4>
-                        <span class="casa">Liceo Comercial A-28</span>
-                        <span class="fecha">1985-1989</span>
-                        <p>Licenciado de la carrera de Contabilidad General.</p>
-                        <div class="conectori">
-                            <div class="circuloi"></div>
-                        </div>
-                    </div>
-                </div>
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
 
-                <div class="col derecha">
-                    <h3>Experiencia de trabajo</h3>
-                    <div class="item der">
-                        <h4>Gestión de clientes</h4>
-                        <span class="casa">PROEXSI LTDA.</span>
-                        <span class="fecha">2015 – A la fecha</span>
-                        <p>Instalación de sistemas administrativos.<br>
-                        Gestión entre usuarios y soporte en temas de redes.</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    <div class="item der">
-                        <h4>Desarrollo Sistemas</h4>
-                        <span class="casa">NAVIERA ORCA CHILE S.A</span>
-                        <span class="fecha">2012 – 2015</span>
-                        <p>Desarrollo e implementacion Sistema SRO.<br>
-                           Apoyo en labores administrativas y contables.<br>
-                           Apoyo en implementacion SAP B1.</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    <div class="item der">
-                        <h4>Desarrollo Sistemas</h4>
-                        <span class="casa">MARISCOPE INGENIERIA</span>
-                        <span class="fecha">2011 - 2012</span>
-                        <p>Desarrollo de proyecto web para Subpesca.<br>
-                           Desarrollo e implementación sitio web.</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  document.querySelectorAll('.animar').forEach(el => observer.observe(el));
+</script>
 
-    <!-- SECCION PORTFOLIO -->
-    <section id="portfolio" class="portfolio">
-        <div class="contenido-seccion">
-            <h2>PORTFOLIO</h2>
-            <div class="galeria">
-				<div class="proyecto">
-                    <img src="img/p7.jpg" alt="">
-                    <div class="overlay">
-                        <h3>Desarrollo Web</h3>
-                        <p>Plabal Termopaneles</p>
-                    </div>
-                </div>			
-                <div class="proyecto">
-                    <img src="img/p1.jpg" alt="">
-                    <div class="overlay">
-                        <h3>Desarrollo Web</h3>
-                        <p>Octava Compañia de Bomberos</p>
-                    </div>
-                </div>
-                <div class="proyecto">
-                    <img src="img/rs1.PNG" alt="">
-                    <div class="overlay">
-                        <h3>Desarrollo Web</h3>
-                        <p>Rincón Saludable</p>
-                    </div>
-                </div>               
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCION CONTACTO -->
-    <section id="contacto" class="contacto">
-        <div class="contenido-seccion">
-            <h2>CONTACTO</h2>
-            <div class="fila">
-                                <!-- Formulario -->
-                               
-                                <div class="col">
-                                    <form action="https://formsubmit.co/cesar.ojeda.alvarado@gmail.com" method="POST" />
-                                    <input type="text"  name="name" placeholder="Tú Nombre">
-                                    <input type="text"  name="phone" placeholder="Número telefónico">
-                                    <input type="email" name="email" placeholder="Dirección de correo">
-                                    <input type="text"  name="subject" placeholder="Tema">
-                                    <textarea name="comments" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
-                                    <input type="hidden"  name="_next" value="https://cojedaalvarado.github.io/">
-                                    <input type="hidden"  name="_captcha" value="false">
-                                    <button>
-                                        Enviar Mensaje <i class="fa-solid fa-paper-plane"></i>
-                                        <span class="overlay"></span>
-                                    </button>
-                                </form>
-                                </div>
-                            
-                <!-- Mapa -->
-                <div class="col">
-                    <img src="img/ubicacion.png" alt="">
-                    <div class="info">
-                        <ul>
-                            <li>
-                                <i class="fa-solid fa-location-dot"></i>
-                                Puerto Montt - Chile
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-envelope"></i>
-                                Email: cesar.ojeda.alvarado@gmail.com
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- footer -->
-    <footer>
-        <a href="#inicio" class="arriba">
-            <i class="fa-solid fa-angles-up"></i>
-        </a>
-       <div class="redes">
-            <a href="https://www.facebook.com/mapumawen/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://twitter.com/mapumawen" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-            <a href="https://www.instagram.com/cesar_ojeda/" target="_blank"><i class="fa-brands fa-instagram"></i>
-            <a href="https://www.linkedin.com/in/luis-cesar-ojeda-alvarado-32504a43/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BvCZdOpVtR9Gh%2BYVuI7P35g%3D%3D" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#"><i class="fa-solid fa-rss"></i></a>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
-
 </html>
-
-
