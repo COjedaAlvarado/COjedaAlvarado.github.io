@@ -12,7 +12,6 @@
     html { scroll-behavior:smooth; }
     body { background:#0f172a; color:#e2e8f0; }
 
-    /* NAV */
     header {
       position:fixed;
       width:100%;
@@ -39,7 +38,6 @@
     }
     nav ul li a:hover { color:#38bdf8; }
 
-    /* HERO */
     .hero {
       height:100vh;
       display:flex;
@@ -52,6 +50,7 @@
     }
     .hero h2 { font-size:50px; }
     .hero p { margin-top:10px; font-size:20px; color:#94a3b8; }
+
     .btn {
       display:inline-block;
       margin-top:20px;
@@ -65,11 +64,26 @@
     }
     .btn:hover { transform:scale(1.05); }
 
-    /* SECCIONES */
     section { padding:80px 20px; max-width:1100px; margin:auto; }
     h3 { font-size:32px; margin-bottom:20px; text-align:center; }
 
-    /* CARDS */
+    .destacado {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+      align-items:center;
+      background:rgba(255,255,255,0.05);
+      padding:30px;
+      border-radius:20px;
+      margin-top:40px;
+    }
+    .destacado img {
+      width:100%;
+      border-radius:15px;
+      height:300px;
+      object-fit:cover;
+    }
+
     .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
     .card {
       background:rgba(255,255,255,0.05);
@@ -79,13 +93,13 @@
       transition:0.3s;
     }
     .card:hover { transform:translateY(-10px); }
-    .card img { width:100%; }
-    .card .card-body { padding:20px; }
-    .tech {
-      margin-top:10px;
-      font-size:12px;
-      color:#94a3b8;
+    .card img {
+      width:100%;
+      height:200px;
+      object-fit:cover;
     }
+    .card .card-body { padding:20px; }
+
     .badges span {
       display:inline-block;
       background:rgba(56,189,248,0.2);
@@ -95,6 +109,7 @@
       margin:2px;
       font-size:11px;
     }
+
     .card-buttons {
       margin-top:15px;
       display:flex;
@@ -110,7 +125,6 @@
       font-weight:bold;
     }
 
-    /* SKILLS */
     .skills { display:grid; grid-template-columns:1fr; gap:15px; max-width:600px; margin:auto; }
     .barra { background:rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; }
     .progreso {
@@ -121,9 +135,21 @@
       font-size:12px;
       transition: width 1.5s ease;
     }
-    .skill { background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; text-align:center; }
 
-    /* CONTACT */
+    .stats {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+      gap:20px;
+      text-align:center;
+      margin-top:30px;
+    }
+    .stat {
+      background:rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:15px;
+    }
+    .stat h4 { font-size:30px; color:#38bdf8; }
+
     .contact a { color:#38bdf8; text-decoration:none; }
 
     footer {
@@ -132,9 +158,12 @@
       color:#94a3b8;
     }
 
-    /* ANIMACIONES */
     .animar { opacity:0; transform:translateY(40px); transition:1s; }
     .animar.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width:768px){
+      .destacado { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -163,83 +192,69 @@
 <section id="sobre" class="animar">
   <h3>Sobre mí</h3>
   <p>
-    Soy Ingeniero en Informática con más de 20 años de experiencia desarrollando sistemas para empresas.
-    Actualmente enfocado en desarrollo web con Laravel, sistemas de gestión, automatización de procesos
-    y desarrollo de soluciones reales.
+    Ingeniero en Informática con más de 20 años desarrollando sistemas para empresas.
+    Especialista en sistemas de gestión, Laravel, MySQL y automatización de procesos.
   </p>
+
+  <div class="stats">
+    <div class="stat"><h4>20+</h4><p>Años experiencia</p></div>
+    <div class="stat"><h4>10+</h4><p>Sistemas desarrollados</p></div>
+    <div class="stat"><h4>5</h4><p>Sistemas activos</p></div>
+    <div class="stat"><h4>100%</h4><p>Proyectos reales</p></div>
+  </div>
+</section>
+
+<section class="animar">
+  <h3>Proyecto Destacado</h3>
+  <div class="destacado">
+    <img src="img/gestion8.png" alt="Sistema Bomberos">
+    <div>
+      <h4>Sistema Gestión Bomberos</h4>
+      <p>Sistema completo desarrollado en Laravel para la administración de voluntarios, hoja de vida, cursos, sanciones, cuotas, guardias y estadísticas.</p>
+      <div class="badges">
+        <span>Laravel</span><span>MySQL</span><span>AdminLTE</span><span>Chart.js</span><span>DataTables</span>
+      </div>
+      <div class="card-buttons">
+        <a href="#" class="btn-small">Ver Sistema</a>
+        <a href="https://github.com/COjedaAlvarado" class="btn-small">GitHub</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="proyectos" class="animar">
-  <h3>Proyectos</h3>
+  <h3>Otros Proyectos</h3>
   <div class="grid">
 
     <div class="card">
-      <img src="img/p7.jpg" alt="Sistema Plabal">
+      <img src="img/p7.jpg">
       <div class="card-body">
         <h4>Sistema Termopaneles Plabal</h4>
-        <p>Sistema de gestión para empresa de termopaneles, incluyendo administración y control de procesos.</p>
-        <div class="badges">
-          <span>PHP</span><span>MySQL</span><span>Bootstrap</span>
-        </div>
-        <div class="card-buttons">
-          <a href="#" class="btn-small">Ver</a>
-        </div>
+        <div class="badges"><span>PHP</span><span>MySQL</span></div>
       </div>
     </div>
 
     <div class="card">
-      <img src="img/rs1.PNG" alt="Rincón Saludable">
+      <img src="img/rs1.PNG">
       <div class="card-body">
         <h4>Rincón Saludable</h4>
-        <p>Sitio web y sistema de administración para emprendimiento de vida saludable.</p>
-        <div class="badges">
-          <span>HTML</span><span>CSS</span><span>JS</span>
-        </div>
-        <div class="card-buttons">
-          <a href="#" class="btn-small">Ver</a>
-        </div>
+        <div class="badges"><span>HTML</span><span>CSS</span><span>JS</span></div>
       </div>
     </div>
 
     <div class="card">
-      <img src="img/p2.jpg" alt="RPM Repuestos">
+      <img src="img/p2.jpg">
       <div class="card-body">
         <h4>RPM Repuestos</h4>
-        <p>Sistema web para gestión y visualización de repuestos automotrices.</p>
-        <div class="badges">
-          <span>Laravel</span><span>MySQL</span>
-        </div>
-        <div class="card-buttons">
-          <a href="#" class="btn-small">Ver</a>
-        </div>
+        <div class="badges"><span>Laravel</span><span>MySQL</span></div>
       </div>
     </div>
 
     <div class="card">
-      <img src="img/gestion8.png" alt="Sistema Bomberos">
-      <div class="card-body">
-        <h4>Sistema Gestión Bomberos</h4>
-        <p>Sistema completo en Laravel con gestión de voluntarios, cursos, sanciones, cuotas y administración.</p>
-        <div class="badges">
-          <span>Laravel</span><span>MySQL</span><span>AdminLTE</span><span>Chart.js</span>
-        </div>
-        <div class="card-buttons">
-          <a href="#" class="btn-small">Ver</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="img/guardias.png" alt="Calendario Guardias">
+      <img src="img/guardias.png">
       <div class="card-body">
         <h4>Calendario de Guardias</h4>
-        <p>Módulo de turnos con calendario dinámico para la compañía de bomberos.</p>
-        <div class="badges">
-          <span>Laravel</span><span>JavaScript</span>
-        </div>
-        <div class="card-buttons">
-          <a href="#" class="btn-small">Ver</a>
-        </div>
+        <div class="badges"><span>Laravel</span><span>JavaScript</span></div>
       </div>
     </div>
 
@@ -249,37 +264,12 @@
 <section id="skills" class="animar">
   <h3>Skills</h3>
   <div class="skills">
-
-    <div>
-      <p>Laravel</p>
-      <div class="barra"><div class="progreso" style="width:90%">90%</div></div>
-    </div>
-
-    <div>
-      <p>PHP</p>
-      <div class="barra"><div class="progreso" style="width:85%">85%</div></div>
-    </div>
-
-    <div>
-      <p>JavaScript</p>
-      <div class="barra"><div class="progreso" style="width:70%">70%</div></div>
-    </div>
-
-    <div>
-      <p>MySQL</p>
-      <div class="barra"><div class="progreso" style="width:80%">80%</div></div>
-    </div>
-
-    <div>
-      <p>Bootstrap</p>
-      <div class="barra"><div class="progreso" style="width:85%">85%</div></div>
-    </div>
-
-    <div>
-      <p>Git</p>
-      <div class="barra"><div class="progreso" style="width:75%">75%</div></div>
-    </div>
-
+    <div><p>Laravel</p><div class="barra"><div class="progreso" style="width:90%">90%</div></div></div>
+    <div><p>PHP</p><div class="barra"><div class="progreso" style="width:85%">85%</div></div></div>
+    <div><p>JavaScript</p><div class="barra"><div class="progreso" style="width:70%">70%</div></div></div>
+    <div><p>MySQL</p><div class="barra"><div class="progreso" style="width:80%">80%</div></div></div>
+    <div><p>Bootstrap</p><div class="barra"><div class="progreso" style="width:85%">85%</div></div></div>
+    <div><p>Git</p><div class="barra"><div class="progreso" style="width:75%">75%</div></div></div>
   </div>
 </section>
 
@@ -287,7 +277,6 @@
   <h3>Contacto</h3>
   <p>Email: <a href="mailto:cesar.ojeda.alvarado@gmail.com">cesar.ojeda.alvarado@gmail.com</a></p>
   <p>GitHub: <a href="https://github.com/COjedaAlvarado" target="_blank">github.com/COjedaAlvarado</a></p>
-  <p>LinkedIn: <a href="https://linkedin.com" target="_blank">Ver perfil</a></p>
 </section>
 
 <footer>
@@ -305,14 +294,11 @@
 
   document.querySelectorAll('.animar').forEach(el => observer.observe(el));
 
-  // animación de skills
   const skills = document.querySelectorAll('.progreso');
   skills.forEach(skill => {
     const width = skill.style.width;
     skill.style.width = '0';
-    setTimeout(() => {
-      skill.style.width = width;
-    }, 300);
+    setTimeout(() => { skill.style.width = width; }, 300);
   });
 </script>
 
