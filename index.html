@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>César Ojeda Alvarado — Full Stack Developer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23060d1a'/%3E%3Crect x='4' y='4' width='92' height='92' rx='15' fill='none' stroke='%2300d4ff' stroke-width='2' opacity='0.5'/%3E%3Ctext x='50' y='56' font-size='34' font-weight='700' text-anchor='middle' fill='%2300d4ff' font-family='monospace' letter-spacing='-1'%3ECOA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* LOADER */
+    #loader{position:fixed;inset:0;background:#060d1a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:9999;transition:opacity .5s ease}
+    .loader-ring{position:relative;width:64px;height:64px}
+    .loader-ring::before,.loader-ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:3px solid transparent}
+    .loader-ring::before{border-top-color:#00d4ff;animation:spin 1s linear infinite}
+    .loader-ring::after{border-bottom-color:rgba(124,58,237,0.6);animation:spin 1.6s linear infinite reverse}
+    .loader-dot{position:absolute;top:50%;left:50%;width:10px;height:10px;border-radius:50%;background:#00d4ff;transform:translate(-50%,-50%);box-shadow:0 0 12px #00d4ff;animation:pdot 1s ease-in-out infinite alternate}
+    .loader-text{font-family:'Space Mono',monospace;font-size:12px;color:rgba(0,212,255,0.6);letter-spacing:3px;text-transform:uppercase;animation:fload 1.2s ease-in-out infinite alternate}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes pdot{from{opacity:.4;transform:translate(-50%,-50%) scale(.8)}to{opacity:1;transform:translate(-50%,-50%) scale(1.2)}}
+    @keyframes fload{from{opacity:.3}to{opacity:.9}}
+
+    /* BASE */
+    :root{
+      --bg:#060d1a;--surface:#0d1b2e;--accent:#00d4ff;--accent2:#7c3aed;
+      --accent3:#10b981;--text:#e2eaf8;--muted:#607590;
+      --border:rgba(0,212,255,0.12);--glow:rgba(0,212,255,0.15);
+      --mono:'Space Mono',monospace;--sans:'DM Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:50px 50px}
+
+    /* ORBS */
+    .orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;animation:drift 12s ease-in-out infinite alternate}
+    .orb-1{width:500px;height:500px;background:rgba(0,212,255,0.06);top:-150px;right:-100px}
+    .orb-2{width:400px;height:400px;background:rgba(124,58,237,0.07);bottom:10%;left:-150px;animation-delay:-5s}
+    .orb-3{width:300px;height:300px;background:rgba(16,185,129,0.05);top:40%;right:20%;animation-delay:-3s}
+    @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(30px,-30px) scale(1.05)}}
+
+    /* HEADER */
+    header{position:fixed;width:100%;top:0;z-index:1000;background:rgba(6,13,26,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    nav{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:auto;padding:16px 24px}
+    .logo{font-family:var(--mono);font-size:16px;color:var(--accent);letter-spacing:1px;display:flex;align-items:center;gap:8px;animation:lglow 3s ease-in-out infinite alternate}
+    .logo span{color:var(--muted)}
+    .logo::before{content:'>';color:var(--accent3);animation:blink 1.2s step-end infinite}
+    @keyframes lglow{from{text-shadow:none}to{text-shadow:0 0 12px rgba(0,212,255,0.6),0 0 24px rgba(0,212,255,0.2)}}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    #navMenu{display:flex;list-style:none;gap:8px}
+    #navMenu li a{color:var(--muted);text-decoration:none;font-size:13px;font-family:var(--mono);padding:6px 14px;border-radius:6px;border:1px solid transparent;transition:all .25s;letter-spacing:.5px}
+    #navMenu li a:hover{color:var(--accent);border-color:var(--border);background:var(--glow)}
+    .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:1px solid var(--border);border-radius:8px;padding:8px 10px;cursor:pointer;z-index:1100}
+    .hamburger span{display:block;width:20px;height:2px;background:var(--accent);border-radius:2px;transition:all .3s;transform-origin:center}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* HERO */
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1;padding:120px 24px 80px;overflow:hidden}
+    .hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,212,255,0.07) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 50% 100%,rgba(124,58,237,0.06) 0%,transparent 70%)}
+    .hero-content{position:relative;z-index:2;max-width:860px}
+    .hero-tag{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--accent3);border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.08);padding:5px 14px;border-radius:20px;margin-bottom:28px;letter-spacing:2px;text-transform:uppercase;animation:fadeUp .8s ease both}
+    .hero h2{font-family:var(--sans);font-size:clamp(32px,5.5vw,72px);font-weight:700;line-height:1.1;letter-spacing:-2px;margin-bottom:10px;animation:fadeUp .8s ease .15s both}
+    .hero h2 .name{display:block;white-space:nowrap;background:linear-gradient(135deg,#fff 20%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero h2 .role{display:block;font-size:clamp(22px,4vw,40px);color:var(--accent);letter-spacing:-1px;font-weight:300;min-height:1.2em}
+    .role-cursor{display:inline-block;width:2px;height:.9em;background:var(--accent);vertical-align:middle;margin-left:3px;animation:cblink .8s step-end infinite}
+    @keyframes cblink{0%,100%{opacity:1}50%{opacity:0}}
+    .hero-desc{color:var(--muted);font-size:17px;max-width:520px;margin:20px auto 36px;line-height:1.7;animation:fadeUp .8s ease .3s both}
+    .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s ease .45s both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+    /* HERO TECH — igual estilo que skill-item */
+    .hero-tech{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:50px;animation:fadeUp .8s ease .6s both}
+    .tech-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:var(--mono);font-size:12px;color:var(--text);
+      background:var(--surface);
+      border:1px solid var(--border);
+      padding:8px 14px;border-radius:10px;
+      transition:all .25s;
+    }
+    .tech-pill i{color:var(--accent);font-size:14px}
+    .tech-pill:hover{border-color:rgba(0,212,255,0.4);background:rgba(0,212,255,0.08);transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,212,255,0.15)}
+
+    /* BUTTONS */
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--accent);color:var(--bg);border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;transition:all .25s;position:relative;overflow:hidden}
+    .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,0.2));opacity:0;transition:opacity .25s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.35)}
+    .btn-primary:hover::before{opacity:1}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:10px;text-decoration:none;font-weight:500;font-size:14px;transition:all .25s}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);transform:translateY(-2px)}
+
+    /* SECTIONS */
+    section{position:relative;z-index:1;padding:100px 24px;max-width:1200px;margin:auto}
+    .section-label{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+    .section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
+    h3{font-size:clamp(28px,4vw,38px);font-weight:700;letter-spacing:-1px;margin-bottom:50px;text-align:center}
+
+    /* SOBRE */
+    #sobre > p{color:var(--muted);font-size:17px;line-height:1.8;max-width:700px;margin:0 auto 50px;text-align:center}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+    .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 20px;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+    .stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));opacity:0;transition:opacity .3s}
+    .stat:hover{transform:translateY(-4px);border-color:rgba(0,212,255,0.3)}
+    .stat:hover::before{opacity:1}
+    .stat h4{font-size:38px;font-weight:700;color:var(--accent);font-family:var(--mono)}
+    .stat p{font-size:13px;color:var(--muted);margin-top:4px}
+
+    /* DESTACADO */
+    .destacado{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:border-color .3s}
+    .destacado:hover{border-color:rgba(0,212,255,0.3)}
+    .destacado img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block;filter:brightness(0.85);transition:filter .4s}
+    .destacado:hover img{filter:brightness(1)}
+    .destacado-info{padding:40px;display:flex;flex-direction:column;justify-content:center}
+    .destacado-info .proj-label{font-family:var(--mono);font-size:11px;color:var(--accent3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+    .destacado-info h4{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:14px}
+    .destacado-info p{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:20px}
+
+    /* BADGES con icono + tooltip */
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .badges span{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(0,212,255,0.08);color:var(--accent);border:1px solid rgba(0,212,255,0.2);border-radius:8px;font-size:16px;cursor:default;transition:all .2s}
+    .badges span:hover{background:rgba(0,212,255,0.18);border-color:rgba(0,212,255,0.5);transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,212,255,0.2)}
+    .badges span::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:#0d1b2e;color:var(--text);font-family:var(--mono);font-size:10px;letter-spacing:.5px;padding:4px 8px;border-radius:6px;border:1px solid var(--border);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:10}
+    .badges span::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#0d1b2e;pointer-events:none;opacity:0;transition:opacity .2s;z-index:10}
+    .badges span:hover::after,.badges span:hover::before{opacity:1}
+    .card-buttons{display:flex;gap:10px;flex-wrap:wrap}
+    .btn-small{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-size:12px;border-radius:8px;font-weight:600;text-decoration:none;transition:all .2s;font-family:var(--mono)}
+    .btn-small.primary{background:var(--accent);color:var(--bg)}
+    .btn-small.primary:hover{box-shadow:0 4px 20px rgba(0,212,255,0.35);transform:translateY(-1px)}
+    .btn-small.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+    .btn-small.ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* GRID */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s}
+    .card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,0.3)}
+    .card-img-wrap{overflow:hidden}
+    .card img{width:100%;height:200px;object-fit:cover;display:block;filter:brightness(0.8);transition:transform .5s,filter .3s}
+    .card:hover img{transform:scale(1.04);filter:brightness(1)}
+    .card-body{padding:22px}
+    .card-body h4{font-size:16px;font-weight:600;margin-bottom:10px;letter-spacing:-.3px}
+
+    /* SKILLS */
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;max-width:800px;margin:auto}
+    .skill-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:border-color .3s}
+    .skill-item:hover{border-color:rgba(0,212,255,0.3)}
+    .skill-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .skill-name{font-family:var(--mono);font-size:13px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .skill-name i{color:var(--accent);font-size:14px}
+    .skill-pct{font-family:var(--mono);font-size:11px;color:var(--accent)}
+    .barra{background:rgba(255,255,255,0.06);border-radius:20px;height:5px;overflow:hidden}
+    .progreso{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:20px;width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+
+    /* CONTACTO */
+    #contacto{text-align:center}
+    .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:700px;margin:0 auto 50px}
+    .contact-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px 24px;text-decoration:none;color:var(--text);transition:all .3s;display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;overflow:hidden}
+    .contact-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+    .contact-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,0.3)}
+    .contact-card:hover::before{transform:scaleX(1)}
+    .contact-icon{width:52px;height:52px;border-radius:14px;background:var(--glow);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--accent);transition:all .3s}
+    .contact-card:hover .contact-icon{background:rgba(0,212,255,0.15);box-shadow:0 0 20px rgba(0,212,255,0.2)}
+    .contact-card h4{font-size:13px;color:var(--muted);font-family:var(--mono);letter-spacing:1px}
+    .contact-card p{font-size:15px;font-weight:500;word-break:break-all}
+    .contact-note{color:var(--muted);font-size:14px;max-width:440px;margin:0 auto;line-height:1.7}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);text-align:center;padding:32px 24px;color:var(--muted);font-size:13px;font-family:var(--mono);position:relative;z-index:1}
+    footer span{color:var(--accent)}
+
+    /* BACK TO TOP */
+    .back-top{position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:var(--accent);color:var(--bg);border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:16px;z-index:999;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,box-shadow .3s;pointer-events:none}
+    .back-top.show{opacity:1;transform:translateY(0);pointer-events:all}
+    .back-top:hover{box-shadow:0 6px 24px rgba(0,212,255,0.4);transform:translateY(-2px)}
+
+    /* SCROLL REVEAL */
+    .animar{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+    .animar.visible{opacity:1;transform:translateY(0)}
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .destacado{grid-template-columns:1fr}
+      .destacado img{min-height:240px}
+    }
+    @media(max-width:640px){
+      .hamburger{display:flex}
+      #navMenu{position:fixed;top:0;left:0;right:0;flex-direction:column;gap:6px;background:rgba(6,13,26,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:80px 24px 40px;border-bottom:1px solid var(--border);transform:translateY(-110%);transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:1050}
+      #navMenu.open{transform:translateY(0)}
+      #navMenu li a{display:block;font-size:16px;padding:14px 18px;border-radius:10px;border:1px solid transparent}
+      #navMenu li a:hover{border-color:var(--border);background:var(--glow);color:var(--accent)}
+      section{padding:70px 18px}
+      .hero-tech{gap:8px}
+      .tech-pill{font-size:11px;padding:7px 11px}
+    }
+  </style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-ring"><div class="loader-dot"></div></div>
+  <div class="loader-text">cargando...</div>
+</div>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<header>
+  <nav>
+    <div class="logo">César Ojeda<span>.dev</span></div>
+    <ul id="navMenu">
+      <li><a href="#inicio">// inicio</a></li>
+      <li><a href="#sobre">// sobre</a></li>
+      <li><a href="#proyectos">// proyectos</a></li>
+      <li><a href="#skills">// skills</a></li>
+      <li><a href="#contacto">// contacto</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-tag">&#x2726; Disponible para proyectos</div>
+    <h2>
+      <span class="name">César Ojeda Alvarado</span>
+      <span class="role" id="typing-target"><span class="role-cursor"></span></span>
+    </h2>
+    <p class="hero-desc">
+      Especialista en Sistemas de Gestión y Desarrollo Web con Laravel.<br>
+      Más de 20 años construyendo soluciones reales para empresas y organizaciones.
+    </p>
+    <div class="hero-ctas">
+      <a href="#proyectos" class="btn-primary"><i class="fa-solid fa-folder-open"></i> Ver Proyectos</a>
+      <a href="#contacto" class="btn-ghost"><i class="fa-solid fa-paper-plane"></i> Contactar</a>
+    </div>
+    <div class="hero-tech">
+      <span class="tech-pill"><i class="fa-brands fa-laravel"></i> Laravel</span>
+      <span class="tech-pill"><i class="fa-brands fa-php"></i> PHP</span>
+      <span class="tech-pill"><i class="fa-solid fa-database"></i> MySQL</span>
+      <span class="tech-pill"><i class="fa-brands fa-js"></i> JavaScript</span>
+      <span class="tech-pill"><i class="fa-brands fa-bootstrap"></i> Bootstrap</span>
+      <span class="tech-pill"><i class="fa-solid fa-gauge"></i> AdminLTE</span>
+      <span class="tech-pill"><i class="fa-solid fa-chart-line"></i> Chart.js</span>
+      <span class="tech-pill"><i class="fa-brands fa-git-alt"></i> Git</span>
+    </div>
+  </div>
+</div>
+
+<section id="sobre" class="animar">
+  <div class="section-label"><i class="fa-solid fa-terminal"></i> sobre mí</div>
+  <h3>Experiencia que genera valor</h3>
+  <p>Ingeniero en Informática con más de 20 años desarrollando sistemas para empresas. Especialista en sistemas de gestión, Laravel, MySQL y automatización de procesos.</p>
+  <div class="stats">
+    <div class="stat"><h4>20+</h4><p>Años de experiencia</p></div>
+    <div class="stat"><h4>10+</h4><p>Sistemas desarrollados</p></div>
+    <div class="stat"><h4>5</h4><p>Sistemas activos</p></div>
+    <div class="stat"><h4>100%</h4><p>Proyectos reales</p></div>
+  </div>
+</section>
+
+<section class="animar">
+  <div class="section-label"><i class="fa-solid fa-star"></i> destacado</div>
+  <h3>Proyecto Principal</h3>
+  <div class="destacado">
+    <img src="img/gestion8.png" alt="Sistema Bomberos">
+    <div class="destacado-info">
+      <div class="proj-label">&#x2726; Proyecto Destacado</div>
+      <h4>Sistema Gestión Bomberos</h4>
+      <p>Sistema completo desarrollado en Laravel para la administración de voluntarios, hoja de vida, cursos, sanciones, cuotas, guardias y estadísticas.</p>
+      <div class="badges">
+        <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
+        <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+        <span data-tip="AdminLTE"><i class="fa-solid fa-gauge"></i></span>
+        <span data-tip="Chart.js"><i class="fa-solid fa-chart-line"></i></span>
+        <span data-tip="DataTables"><i class="fa-solid fa-table"></i></span>
+      </div>
+      <div class="card-buttons">
+        <a href="#" class="btn-small primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Sistema</a>
+        <a href="https://github.com/COjedaAlvarado" class="btn-small ghost" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos" class="animar">
+  <div class="section-label"><i class="fa-solid fa-code"></i> proyectos</div>
+  <h3>Otros Proyectos</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="card-img-wrap"><img src="img/p7.jpg" alt="Termopaneles Plabal"></div>
+      <div class="card-body">
+        <h4>Sistema Termopaneles Plabal</h4>
+        <div class="badges">
+          <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
+          <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+          <span data-tip="AdminLTE"><i class="fa-solid fa-gauge"></i></span>
+          <span data-tip="Chart.js"><i class="fa-solid fa-chart-line"></i></span>
+          <span data-tip="DataTables"><i class="fa-solid fa-table"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img-wrap"><img src="img/rs1.PNG" alt="Rincón Saludable"></div>
+      <div class="card-body">
+        <h4>Rincón Saludable</h4>
+        <div class="badges">
+          <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
+          <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+          <span data-tip="AdminLTE"><i class="fa-solid fa-gauge"></i></span>
+          <span data-tip="Chart.js"><i class="fa-solid fa-chart-line"></i></span>
+          <span data-tip="DataTables"><i class="fa-solid fa-table"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img-wrap"><img src="img/datalite.jpg" alt="Datalite CRM"></div>
+      <div class="card-body">
+        <h4>Datalite CRM</h4>
+        <div class="badges">
+          <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
+          <span data-tip="Vite"><i class="fa-solid fa-bolt"></i></span>
+          <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+          <span data-tip="Livewire"><i class="fa-solid fa-tower-broadcast"></i></span>
+          <span data-tip="Tailwind CSS"><i class="fa-brands fa-css3-alt"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img-wrap"><img src="img/p2.jpg" alt="RPM Repuestos"></div>
+      <div class="card-body">
+        <h4>RPM Repuestos</h4>
+        <div class="badges">
+          <span data-tip="PHP"><i class="fa-brands fa-php"></i></span>
+          <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img-wrap"><img src="img/guardias.png" alt="Calendario de Guardias"></div>
+      <div class="card-body">
+        <h4>Calendario de Guardias</h4>
+        <div class="badges">
+          <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
+          <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+          <span data-tip="JavaScript"><i class="fa-brands fa-js"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="animar">
+  <div class="section-label"><i class="fa-solid fa-microchip"></i> skills</div>
+  <h3>Stack Técnico</h3>
+  <div class="skills-grid">
+    <div class="skill-item">
+      <div class="skill-header"><div class="skill-name"><i class="fa-brands fa-laravel"></i> Laravel</div><div class="skill-pct">90%</div></div>
+      <div class="barra"><div class="progreso" data-w="90%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-header"><div class="skill-name"><i class="fa-brands fa-php"></i> PHP</div><div class="skill-pct">85%</div></div>
+      <div class="barra"><div class="progreso" data-w="85%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-header"><div class="skill-name"><i class="fa-brands fa-js"></i> JavaScript</div><div class="skill-pct">70%</div></div>
+      <div class="barra"><div class="progreso" data-w="70%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-header"><div class="skill-name"><i class="fa-solid fa-database"></i> MySQL</div><div class="skill-pct">80%</div></div>
+      <div class="barra"><div class="progreso" data-w="80%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-header"><div class="skill-name"><i class="fa-brands fa-bootstrap"></i> Bootstrap</div><div class="skill-pct">85%</div></div>
+      <div class="barra"><div class="progreso" data-w="85%"></div></div>
+    </div>
+    <div class="skill-item">
+      <div class="skill-header"><div class="skill-name"><i class="fa-brands fa-git-alt"></i> Git</div><div class="skill-pct">75%</div></div>
+      <div class="barra"><div class="progreso" data-w="75%"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="animar">
+  <div class="section-label"><i class="fa-solid fa-satellite-dish"></i> contacto</div>
+  <h3>Trabajemos Juntos</h3>
+  <div class="contact-grid">
+    <a href="mailto:cesar.ojeda.alvarado@gmail.com" class="contact-card">
+      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+      <h4>EMAIL</h4>
+      <p>cesar.ojeda.alvarado&#64;gmail.com</p>
+    </a>
+    <a href="https://github.com/COjedaAlvarado" target="_blank" class="contact-card">
+      <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
+      <h4>GITHUB</h4>
+      <p>github.com/COjedaAlvarado</p>
+    </a>
+  </div>
+  <p class="contact-note">
+    ¿Tienes un proyecto en mente o necesitas un sistema a medida?<br>
+    No dudes en escribirme, respondo rápido.
+  </p>
+</section>
+
+<a href="#inicio" class="back-top" id="backTop" title="Volver arriba">
+  <i class="fa-solid fa-arrow-up"></i>
+</a>
+
+<footer>
+  <p>&#169; 2026 <span>César Ojeda Alvarado</span> &#8212; Construido con <span>&lt;/&gt;</span> y café</p>
+</footer>
+
+<script>
+(function() {
+  /* LOADER */
+  function hideLoader() {
+    var el = document.getElementById('loader');
+    if (!el) return;
+    el.style.opacity = '0';
+    setTimeout(function() { el.style.display = 'none'; }, 520);
+  }
+  var lt = setTimeout(hideLoader, 3000);
+  window.addEventListener('load', function() { clearTimeout(lt); setTimeout(hideLoader, 400); });
+
+  /* TYPING */
+  setTimeout(function() {
+    var target = document.getElementById('typing-target');
+    if (!target) return;
+    var cursor = target.querySelector('.role-cursor');
+    var text = 'Full Stack Developer';
+    var PAUSE = 30000, WAIT = 800, TS = 70, ES = 35;
+    function typed() { var n=[]; target.childNodes.forEach(function(x){if(x!==cursor)n.push(x);}); return n; }
+    function erase(cb) {
+      var n=typed(); if(!n.length){cb();return;}
+      var last=n[n.length-1], v=last.nodeValue||'';
+      if(v.length>1){last.nodeValue=v.slice(0,-1);setTimeout(function(){erase(cb);},ES);}
+      else{target.removeChild(last);setTimeout(function(){erase(cb);},ES);}
+    }
+    function write(i,cb) {
+      if(i<text.length){target.insertBefore(document.createTextNode(text.charAt(i)),cursor);setTimeout(function(){write(i+1,cb);},TS);}
+      else{cb();}
+    }
+    function loop() { write(0,function(){setTimeout(function(){erase(function(){setTimeout(loop,WAIT);});},PAUSE);}); }
+    loop();
+  }, 1100);
+
+  /* HAMBURGER */
+  var hb=document.getElementById('hamburger'), nm=document.getElementById('navMenu');
+  if(hb&&nm){
+    hb.addEventListener('click',function(){hb.classList.toggle('open');nm.classList.toggle('open');});
+    nm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hb.classList.remove('open');nm.classList.remove('open');});});
+  }
+
+  /* BACK TO TOP */
+  var bt=document.getElementById('backTop');
+  if(bt){window.addEventListener('scroll',function(){bt.classList[window.scrollY>400?'add':'remove']('show');});}
+
+  /* SCROLL REVEAL */
+  var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.05});
+  document.querySelectorAll('.animar').forEach(function(el){ro.observe(el);});
+
+  /* SKILL BARS */
+  var so=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.progreso').forEach(function(b){setTimeout(function(){b.style.width=b.getAttribute('data-w');},200);});
+        so.unobserve(e.target);
+      }
+    });
+  },{threshold:0.05});
+  var ss=document.querySelector('#skills');
+  if(ss)so.observe(ss);
+})();
+</script>
+</body>
+</html>
