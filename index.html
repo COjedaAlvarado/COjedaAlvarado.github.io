@@ -183,6 +183,28 @@
     ::-webkit-scrollbar-track{background:var(--bg)}
     ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
 
+    /* MODAL CARRUSEL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+    .modal-overlay.active{opacity:1;pointer-events:all}
+    .modal-box{position:relative;width:90%;max-width:820px;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;transform:scale(.95);transition:transform .3s ease}
+    .modal-overlay.active .modal-box{transform:scale(1)}
+    .modal-close{position:absolute;top:12px;right:12px;z-index:10;width:36px;height:36px;border-radius:10px;background:rgba(0,0,0,0.5);border:1px solid var(--border);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .modal-close:hover{background:rgba(0,212,255,0.15);color:var(--accent);border-color:rgba(0,212,255,0.4)}
+    .carousel{position:relative;width:100%;overflow:hidden}
+    .carousel-track{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);width:100%}
+    .carousel-slide{flex:0 0 100%;width:100%}
+    .carousel-slide img{width:100%;max-height:520px;object-fit:cover;display:block}
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:10px;background:rgba(6,13,26,0.7);border:1px solid var(--border);color:var(--text);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .carousel-btn:hover{background:rgba(0,212,255,0.2);border-color:rgba(0,212,255,0.5);color:var(--accent)}
+    .carousel-prev{left:12px}
+    .carousel-next{right:12px}
+    .carousel-dots{display:flex;justify-content:center;gap:8px;padding:14px 0 18px}
+    .carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .25s;border:none}
+    .carousel-dot.active{background:var(--accent);box-shadow:0 0 8px rgba(0,212,255,0.5)}
+    .card-img-wrap.clickable{cursor:pointer}
+    .card-img-wrap.clickable img{transition:transform .5s,filter .3s,box-shadow .3s}
+    .card-img-wrap.clickable:hover img{transform:scale(1.04);filter:brightness(1);box-shadow:0 0 0 2px rgba(0,212,255,0.4)}
+
     /* RESPONSIVE */
     @media(max-width:900px){
       .destacado{grid-template-columns:1fr}
@@ -271,11 +293,11 @@
   <div class="section-label"><i class="fa-solid fa-star"></i> destacado</div>
   <h3>Proyecto Principal</h3>
   <div class="destacado">
-    <img src="img/gestion8.png" alt="Sistema Bomberos">
+    <div class="card-img-wrap clickable" id="cotizaImgTrigger" style="min-height:320px"><img src="img/cotiza1.JPG" alt="Sistema Cotizador Termopaneles Plabal" style="height:100%;min-height:320px"></div>
     <div class="destacado-info">
       <div class="proj-label">&#x2726; Proyecto Destacado</div>
-      <h4>Sistema Gestión Bomberos</h4>
-      <p>Sistema completo desarrollado en Laravel para la administración de voluntarios, hoja de vida, cursos, sanciones, cuotas, guardias y estadísticas.</p>
+      <h4>Sistema Cotizador Termopaneles Plabal</h4>
+      <p>Sistema desarrollado en Laravel para el ingreso de cotizaciones de termopaneles, gestión de clientes y producción y despacho de termopaneles.</p>
       <div class="badges">
         <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
         <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
@@ -284,7 +306,7 @@
         <span data-tip="DataTables"><i class="fa-solid fa-table"></i></span>
       </div>
       <div class="card-buttons">
-        <a href="#" class="btn-small primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Sistema</a>
+        <a href="https://cotizador.thschile.cl" target="_blank" class="btn-small primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Sistema</a>
         <a href="https://github.com/COjedaAlvarado" class="btn-small ghost" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
       </div>
     </div>
@@ -295,10 +317,24 @@
   <div class="section-label"><i class="fa-solid fa-code"></i> proyectos</div>
   <h3>Otros Proyectos</h3>
   <div class="grid">
+        <div class="card">
+      <div class="card-img-wrap clickable" id="thsImgTrigger"><img src="img/ths1.JPG" alt="Web Ths Chile SPA"></div>
+      <div class="card-body"> 
+        <h4>Web Ths Chile SPA</h4>
+        <div class="badges">
+          <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
+          <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+          <span data-tip="AdminLTE"><i class="fa-solid fa-gauge"></i></span>
+          <span data-tip="Chart.js"><i class="fa-solid fa-chart-line"></i></span>
+          <span data-tip="DataTables"><i class="fa-solid fa-table"></i></span>
+          <a href="https://www.thschile.cl" target="_blank" class="btn-small primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Web</a>
+        </div>
+      </div>
+    </div>
     <div class="card">
-      <div class="card-img-wrap"><img src="img/p7.jpg" alt="Termopaneles Plabal"></div>
-      <div class="card-body">
-        <h4>Sistema Termopaneles Plabal</h4>
+      <div class="card-img-wrap clickable" id="gestionImgTrigger"><img src="img/gestion8.png" alt="Sistema Gestión Bomberos"></div>
+      <div class="card-body"> 
+        <h4>Sistema Gestión 8va Cia Bomberos</h4>
         <div class="badges">
           <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
           <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
@@ -309,7 +345,7 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-img-wrap"><img src="img/rs1.PNG" alt="Rincón Saludable"></div>
+      <div class="card-img-wrap clickable" id="rsImgTrigger"><img src="img/rs1.JPG" alt="Rincón Saludable"></div>
       <div class="card-body">
         <h4>Rincón Saludable</h4>
         <div class="badges">
@@ -322,7 +358,7 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-img-wrap"><img src="img/datalite.jpg" alt="Datalite CRM"></div>
+      <div class="card-img-wrap clickable" id="dataliteImgTrigger"><img src="img/datalite.jpg" alt="Datalite CRM"></div>
       <div class="card-body">
         <h4>Datalite CRM</h4>
         <div class="badges">
@@ -334,7 +370,7 @@
         </div>
       </div>
     </div>
-    <div class="card">
+    <!-- <div class="card">
       <div class="card-img-wrap"><img src="img/p2.jpg" alt="RPM Repuestos"></div>
       <div class="card-body">
         <h4>RPM Repuestos</h4>
@@ -343,14 +379,36 @@
           <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="card">
-      <div class="card-img-wrap"><img src="img/guardias.png" alt="Calendario de Guardias"></div>
+      <div class="card-img-wrap clickable" id="guardiasImgTrigger"><img src="img/guardias.png" alt="Calendario de Guardias"></div>
       <div class="card-body">
-        <h4>Calendario de Guardias</h4>
+        <h4>Calendario de Guardias 8va Cia Bomberos</h4>
         <div class="badges">
           <span data-tip="Laravel"><i class="fa-brands fa-laravel"></i></span>
           <span data-tip="MySQL"><i class="fa-solid fa-database"></i></span>
+          <span data-tip="JavaScript"><i class="fa-brands fa-js"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img-wrap clickable" id="prlacImgTrigger"><img src="img/prlac1.JPG" alt="Sistema PRLAC"></div>
+      <div class="card-body">
+        <h4>Sistema PRLAC</h4>
+        <div class="badges">
+          <span data-tip="HTML"><i class="fa-brands fa-html5"></i></span>
+          <span data-tip="CSS"><i class="fa-brands fa-css3-alt"></i></span>
+          <span data-tip="JavaScript"><i class="fa-brands fa-js"></i></span>
+        </div>
+      </div>
+    </div>
+        <div class="card">
+      <div class="card-img-wrap clickable" id="pizarraImgTrigger"><img src="img/pizarra1.JPG" alt="Pizarra Familiar Online"></div>
+      <div class="card-body">
+        <h4>Pizarra Familiar Online</h4>
+        <div class="badges">
+          <span data-tip="HTML"><i class="fa-brands fa-html5"></i></span>
+          <span data-tip="CSS"><i class="fa-brands fa-css3-alt"></i></span>
           <span data-tip="JavaScript"><i class="fa-brands fa-js"></i></span>
         </div>
       </div>
@@ -418,6 +476,142 @@
   <p>&#169; 2026 <span>César Ojeda Alvarado</span> &#8212; Construido con <span>&lt;/&gt;</span> y café</p>
 </footer>
 
+<!-- MODAL CARRUSEL RS -->
+<div id="modalRs" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Rincón Saludable">
+  <div class="modal-box">
+    <button class="modal-close" id="modalRsClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="rsTrack">
+        <div class="carousel-slide"><img src="img/rs2.JPG" alt="Rincón Saludable — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/rs3.JPG" alt="Rincón Saludable — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/rs4.JPG" alt="Rincón Saludable — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="rsPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="rsNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="rsDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRUSEL DATALITE -->
+<div id="modalDatalite" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Datalite CRM">
+  <div class="modal-box">
+    <button class="modal-close" id="modalDataliteClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="dataliteTrack">
+        <div class="carousel-slide"><img src="img/data2.JPG" alt="Datalite CRM — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/data3.JPG" alt="Datalite CRM — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/data4.JPG" alt="Datalite CRM — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="datalitePrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="dataliteNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="dataliteDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRUSEL GUARDIAS -->
+<div id="modalGuardias" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Calendario de Guardias 8va Cia Bomberos">
+  <div class="modal-box">
+    <button class="modal-close" id="modalGuardiasClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="guardiasTrack">
+        <div class="carousel-slide"><img src="img/guardia2.JPG" alt="Calendario de Guardias — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/guardia3.JPG" alt="Calendario de Guardias — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/guardia4.JPG" alt="Calendario de Guardias — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="guardiasPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="guardiasNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="guardiasDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRUSEL GESTION -->
+<div id="modalGestion" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Sistema Gestión 8va Cia Bomberos">
+  <div class="modal-box">
+    <button class="modal-close" id="modalGestionClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="gestionTrack">
+        <div class="carousel-slide"><img src="img/gestion2.JPG" alt="Sistema Gestión 8va Cia Bomberos — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/gestion3.JPG" alt="Sistema Gestión 8va Cia Bomberos — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/gestion4.JPG" alt="Sistema Gestión 8va Cia Bomberos — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="gestionPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="gestionNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="gestionDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRUSEL COTIZA -->
+<div id="modalCotiza" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Sistema Cotizador PLabal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalCotizaClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="cotizaTrack">
+        <div class="carousel-slide"><img src="img/cotiza1.JPG" alt="Sistema Cotizador PLabal — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/cotiza2.JPG" alt="Sistema Cotizador PLabal — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/cotiza3.JPG" alt="Sistema Cotizador PLabal — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="cotizaPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="cotizaNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="cotizaDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRUSEL PRLAC -->
+<div id="modalPrlac" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Sistema PRLAC">
+  <div class="modal-box">
+    <button class="modal-close" id="modalPrlacClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="prlacTrack">
+        <div class="carousel-slide"><img src="img/prlac1.JPG" alt="Sistema PRLAC — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/prlac2.JPG" alt="Sistema PRLAC — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/prlac3.JPG" alt="Sistema PRLAC — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="prlacPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="prlacNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="prlacDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRUSEL PIZARRA -->
+<div id="modalPizarra" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Pizarra Familiar Online">
+  <div class="modal-box">
+    <button class="modal-close" id="modalPizarraClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="pizarraTrack">
+        <div class="carousel-slide"><img src="img/pizarra1.JPG" alt="Pizarra Familiar Online — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/pizarra2.JPG" alt="Pizarra Familiar Online — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/pizarra3.JPG" alt="Pizarra Familiar Online — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="pizarraPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="pizarraNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="pizarraDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CARRUSEL THS -->
+<div id="modalThs" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Galería Web Ths Chile SPA">
+  <div class="modal-box">
+    <button class="modal-close" id="modalThsClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <div class="carousel">
+      <div class="carousel-track" id="thsTrack">
+        <div class="carousel-slide"><img src="img/ths1.JPG" alt="Web Ths Chile SPA — imagen 1"></div>
+        <div class="carousel-slide"><img src="img/ths2.JPG" alt="Web Ths Chile SPA — imagen 2"></div>
+        <div class="carousel-slide"><img src="img/ths3.JPG" alt="Web Ths Chile SPA — imagen 3"></div>
+      </div>
+      <button class="carousel-btn carousel-prev" id="thsPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="carousel-btn carousel-next" id="thsNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="carousel-dots" id="thsDots"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function() {
   /* LOADER */
@@ -459,6 +653,23 @@
     nm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hb.classList.remove('open');nm.classList.remove('open');});});
   }
 
+  /* LIMPIAR HASH DE LA URL */
+  (function(){
+    // Al cargar: si llegaron con #hash, hacer scroll y limpiar URL
+    var hash=location.hash.replace('#','').trim();
+    if(hash){var el=document.getElementById(hash);if(el)el.scrollIntoView({behavior:'smooth'});}
+    history.replaceState(null,'',location.pathname+location.search);
+    // Interceptar clics en enlaces #seccion para que no aparezca el hash
+    document.querySelectorAll('a[href^="#"]').forEach(function(link){
+      link.addEventListener('click',function(e){
+        var id=link.getAttribute('href').replace('#','').trim();
+        if(!id)return;
+        var target=document.getElementById(id);
+        if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});history.replaceState(null,'',location.pathname+location.search);}
+      });
+    });
+  })();
+
   /* BACK TO TOP */
   var bt=document.getElementById('backTop');
   if(bt){window.addEventListener('scroll',function(){bt.classList[window.scrollY>400?'add':'remove']('show');});}
@@ -478,6 +689,52 @@
   },{threshold:0.05});
   var ss=document.querySelector('#skills');
   if(ss)so.observe(ss);
+
+  /* MODAL CARRUSEL — función reutilizable */
+  function initCarousel(modalId,triggerId,closeId,trackId,dotsId,prevId,nextId){
+    var modal=document.getElementById(modalId);
+    var trigger=document.getElementById(triggerId);
+    var closeBtn=document.getElementById(closeId);
+    var track=document.getElementById(trackId);
+    var dotsWrap=document.getElementById(dotsId);
+    var prevBtn=document.getElementById(prevId);
+    var nextBtn=document.getElementById(nextId);
+    if(!modal||!trigger||!track)return;
+    var total=track.children.length;
+    var current=0;
+    for(var i=0;i<total;i++){
+      var d=document.createElement('button');
+      d.className='carousel-dot'+(i===0?' active':'');
+      d.setAttribute('aria-label','Imagen '+(i+1));
+      (function(idx){d.addEventListener('click',function(){goTo(idx);});})(i);
+      dotsWrap.appendChild(d);
+    }
+    function goTo(n){
+      current=(n+total)%total;
+      track.style.transform='translateX(-'+current*100+'%)';
+      dotsWrap.querySelectorAll('.carousel-dot').forEach(function(dot,i){dot.classList.toggle('active',i===current);});
+    }
+    prevBtn.addEventListener('click',function(){goTo(current-1);});
+    nextBtn.addEventListener('click',function(){goTo(current+1);});
+    trigger.addEventListener('click',function(){goTo(0);modal.classList.add('active');document.body.style.overflow='hidden';});
+    function closeModal(){modal.classList.remove('active');document.body.style.overflow='';}
+    closeBtn.addEventListener('click',closeModal);
+    modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});
+    document.addEventListener('keydown',function(e){
+      if(!modal.classList.contains('active'))return;
+      if(e.key==='Escape')closeModal();
+      if(e.key==='ArrowLeft')goTo(current-1);
+      if(e.key==='ArrowRight')goTo(current+1);
+    });
+  }
+  initCarousel('modalThs','thsImgTrigger','modalThsClose','thsTrack','thsDots','thsPrev','thsNext');
+  initCarousel('modalRs','rsImgTrigger','modalRsClose','rsTrack','rsDots','rsPrev','rsNext');
+  initCarousel('modalDatalite','dataliteImgTrigger','modalDataliteClose','dataliteTrack','dataliteDots','datalitePrev','dataliteNext');
+  initCarousel('modalGuardias','guardiasImgTrigger','modalGuardiasClose','guardiasTrack','guardiasDots','guardiasPrev','guardiasNext');
+  initCarousel('modalGestion','gestionImgTrigger','modalGestionClose','gestionTrack','gestionDots','gestionPrev','gestionNext');
+  initCarousel('modalCotiza','cotizaImgTrigger','modalCotizaClose','cotizaTrack','cotizaDots','cotizaPrev','cotizaNext');
+  initCarousel('modalPrlac','prlacImgTrigger','modalPrlacClose','prlacTrack','prlacDots','prlacPrev','prlacNext');
+  initCarousel('modalPizarra','pizarraImgTrigger','modalPizarraClose','pizarraTrack','pizarraDots','pizarraPrev','pizarraNext');
 })();
 </script>
 </body>
